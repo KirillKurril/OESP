@@ -20,18 +20,13 @@ std::chrono::duration<double> processingDuration;
 std::chrono::duration<double> asyncWriteDuration;
 
 
-void computeStatistics(const std::vector<int>& data, double& mean, double& stdev, int& minValue, int& maxValue) {
+void processFileData(const std::vector<int>& data, std::vector<int>& processedData) {
     int size = data.size();
     if (size == 0) return;
-    mean = std::accumulate(data.begin(), data.end(), 0.0) / size;
-    minValue = *std::min_element(data.begin(), data.end());
-    maxValue = *std::max_element(data.begin(), data.end());
 
-    double varianceSum = 0.0;
-    for (int value : data) {
-        varianceSum += (value - mean) * (value - mean);
+    for (int number : data) {
+        processedData.push_back(number + 5);
     }
-    stdev = std::sqrt(varianceSum / size);
 }
 
 void createDataFile(const std::wstring& filename, int count) {
@@ -47,23 +42,30 @@ void createDataFile(const std::wstring& filename, int count) {
     }
 }
 
-void saveToFile(double mean, double stdev, int minValue, int maxValue, const std::wstring& filename) {
+void saveToFile(const std::vector<int>& processedData, const std::wstring& filename) {
     HANDLE hFile = CreateFile(
         filename.c_str(),
         GENERIC_WRITE,
-        FILE_APPEND_DATA,
+        0, 
         NULL,
-        OPEN_ALWAYS,
+        OPEN_ALWAYS, 
         FILE_ATTRIBUTE_NORMAL,
         NULL
     );
 
     if (hFile != INVALID_HANDLE_VALUE) {
+        SetFilePointer(hFile, 0, NULL, FILE_END);
+
         DWORD writtenBytes;
-        std::wstring result = L"Mean: " + std::to_wstring(mean) + L", Std Dev: " + std::to_wstring(stdev) +
-            L", Min: " + std::to_wstring(minValue) + L", Max: " + std::to_wstring(maxValue) + L"\n";
+        std::wstring result;
+
+        for (int value : processedData) {
+            result += std::to_wstring(value) + L" ";
+        }
+        result += L"\n"; 
+
         WriteFile(hFile, result.c_str(), result.size() * sizeof(wchar_t), &writtenBytes, NULL);
-        CloseHandle(hFile);
+        CloseHandle(hFile); 
     }
     else {
         std::wcerr << L"Error opening file for writing: " << filename << '\n';
@@ -77,6 +79,7 @@ void CALLBACK onAsyncReadComplete(DWORD errorCode, DWORD bytesRead, LPOVERLAPPED
         buffer[bytesRead] = '\0';
 
         std::vector<int> data;
+        std::vector<int> processedData;
         std::istringstream iss(buffer);
         int value;
         while (iss >> value) {
@@ -85,15 +88,13 @@ void CALLBACK onAsyncReadComplete(DWORD errorCode, DWORD bytesRead, LPOVERLAPPED
 
         auto processingStart = std::chrono::high_resolution_clock::now();
 
-        double mean, stdev;
-        int minValue, maxValue;
-        computeStatistics(data, mean, stdev, minValue, maxValue);
+        processFileData(data, processedData);
 
         auto processingEnd = std::chrono::high_resolution_clock::now();
         processingDuration = processingEnd - processingStart;
 
         processingStart = std::chrono::high_resolution_clock::now();
-        saveToFile(mean, stdev, minValue, maxValue, L"stats_async.txt");
+        saveToFile(processedData, L"processed_data.txt");
         processingEnd = std::chrono::high_resolution_clock::now();
         asyncWriteDuration = processingEnd - processingStart;
     }
@@ -184,17 +185,16 @@ DWORD performSyncFileOperations() {
     buffer[bytesRead] = '\0';
 
     std::vector<int> data;
+    std::vector<int> processedData;
     std::istringstream iss(buffer);
     int value;
     while (iss >> value) {
         data.push_back(value);
     }
 
-    double mean, stdev;
-    int minValue, maxValue;
-    computeStatistics(data, mean, stdev, minValue, maxValue);
+    processFileData(data, processedData);
 
-    saveToFile(mean, stdev, minValue, maxValue, L"stats_sync.txt");
+    saveToFile(data, L"processed_sync.txt");
 
     delete[] buffer;
     CloseHandle(hFile);
@@ -202,7 +202,7 @@ DWORD performSyncFileOperations() {
 }
 
 int main() {
-    createDataFile(L"data.txt", 10000);
+    createDataFile(L"data.txt", 100000);
 
     int i = 0;
     bool stop = false;
@@ -211,7 +211,7 @@ int main() {
         int bufferMultiplier = pow(2, i);
         i++;
         int maxBufferSize = BASE_BUFFER_SIZE * bufferMultiplier;
-        if (maxBufferSize >= 1e5) {
+        if (maxBufferSize >= 1e6) {
             break;
         }
         auto asyncStart = std::chrono::high_resolution_clock::now();
@@ -235,7 +235,7 @@ int main() {
 
     std::chrono::duration<double> syncDuration = syncEnd - syncStart;
     std::cout << "\nSynchronous Execution:\n";
-    std::cout << "Buffer size: " << syncBufferSize << '\t'
+    std::cout << "File size: " << syncBufferSize << '\t'
         << " Total time: " << syncDuration.count() << '\n';
 
     return 0;
