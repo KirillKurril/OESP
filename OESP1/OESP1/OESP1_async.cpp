@@ -23,9 +23,9 @@ void CALLBACK ReadComplete(DWORD dwErrorCode, DWORD dwNumberOfBytesTransferred, 
 
 DWORD WINAPI readFileChunk(LPVOID lpParams) {
     ThreadParams* params = static_cast<ThreadParams*>(lpParams);
-    params->overlapped.hEvent = reinterpret_cast<HANDLE>(params); // Store the params for the callback
-    params->overlapped.Offset = params->startOffset; // Set the starting offset
-    params->overlapped.OffsetHigh = 0; // High order part of the offset is zero
+    params->overlapped.hEvent = reinterpret_cast<HANDLE>(params);
+    params->overlapped.Offset = params->startOffset; 
+    params->overlapped.OffsetHigh = 0; 
     params->buffer->resize(params->bytesToRead);
 
     BOOL result = ReadFileEx(params->hFile, params->buffer->data(), params->bytesToRead, &params->overlapped, ReadComplete);

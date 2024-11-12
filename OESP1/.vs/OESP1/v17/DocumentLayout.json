@@ -26,9 +26,9 @@
               "Title": "OESP1_async.cpp",
               "DocumentMoniker": "D:\\uni\\OESP\\OESP1\\OESP1\\OESP1_async.cpp",
               "RelativeDocumentMoniker": "OESP1\\OESP1_async.cpp",
-              "ToolTip": "D:\\uni\\OESP\\OESP1\\OESP1\\OESP1_async.cpp*",
-              "RelativeToolTip": "OESP1\\OESP1_async.cpp*",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAAAJ4AAAAAAAAAAAAAAA==",
+              "ToolTip": "D:\\uni\\OESP\\OESP1\\OESP1\\OESP1_async.cpp",
+              "RelativeToolTip": "OESP1\\OESP1_async.cpp",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAACYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-10T12:20:36.743Z",
               "EditorCaption": ""
@@ -44,6 +44,16 @@
               "ViewState": "AgIAAEEAAAAAAAAAAAAUwGoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-10T10:17:47.036Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 190,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
             }
           ]
         }

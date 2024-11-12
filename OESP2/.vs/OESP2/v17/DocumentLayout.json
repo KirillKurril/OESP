@@ -1,0 +1,47 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\uni\\OESP\\OESP2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D0543FFC-F78E-4BCE-8BBA-4CE412BA551D}|OESP2\\OESP2.vcxproj|D:\\uni\\OESP\\OESP2\\OESP2\\OESP2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D0543FFC-F78E-4BCE-8BBA-4CE412BA551D}|OESP2\\OESP2.vcxproj|solutionrelative:OESP2\\OESP2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 190,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OESP2.cpp",
+              "DocumentMoniker": "D:\\uni\\OESP\\OESP2\\OESP2\\OESP2.cpp",
+              "RelativeDocumentMoniker": "OESP2\\OESP2.cpp",
+              "ToolTip": "D:\\uni\\OESP\\OESP2\\OESP2\\OESP2.cpp",
+              "RelativeToolTip": "OESP2\\OESP2.cpp",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAjwFgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-04T14:49:59.349Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+﻿  OESP2.cpp
+D:\uni\OESP\OESP2\OESP2\OESP2.cpp(24,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\uni\OESP\OESP2\OESP2\OESP2.cpp(65,56): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+D:\uni\OESP\OESP2\OESP2\OESP2.cpp(211,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  OESP2.vcxproj -> D:\uni\OESP\OESP2\x64\Debug\OESP2.exe
